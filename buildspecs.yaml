@@ -1,4 +1,12 @@
 version: 0.2
+env:
+  shell: shell-tag
+  variables:
+    key: "value"
+    key: "value"
+  parameter-store:
+    key: "value"
+    key: "value"
 phases:
   install:
     runtime-versions:
@@ -9,7 +17,7 @@ phases:
       - aws --version
       - echo $AWS_DEFAULT_REGION
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - REPOSITORY_URI=622395351311.dkr.ecr.eu-west-2.amazonaws.com/ashutoshkaledemo
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.eu-west-2.amazonaws.com/ashutoshkaledemo
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
